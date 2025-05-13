@@ -34,5 +34,12 @@ test('gana cuando se adivinan todas las letras', () => {
 });
 //GREEN: crear el método estaGanado
 
-
+// Test No. 5: RED: va a fallar porque no existe estaPerdido() y no guardamos errores.
+test('el juego se pierde cuando se alcanzan los errores máximos', () => {
+  const juego = new Ahorcado('agil');
+  juego.adivinar('z'); // Error 1
+  juego.adivinar('d'); // Error 2
+  juego.adivinar('b'); // Error 3
+  expect(juego.estaPerdido()).toBe(true);
+});
 
