@@ -15,5 +15,13 @@ test('adivinar una letra correcta devuelve true', () => {
 });
 //GREEN: crear el método adivinar en la clase Ahorcado
 
+// Test No. 3: RED: no tiene red porque adivinar usa includes que devuelve false cuando no encuentra la letra
+test('letra incorrecta devuelve false', () => {
+  const juego = new Ahorcado('agil');
+  const resultado = juego.adivinar('z');
+  expect(resultado).toBe(false);
+});
+//GREEN: SIN CAMBIOS
+
 
 
