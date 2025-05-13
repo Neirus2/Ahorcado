@@ -23,5 +23,16 @@ test('letra incorrecta devuelve false', () => {
 });
 //GREEN: SIN CAMBIOS
 
+// Test No. 4: RED: va a fallar porque no existe estaGanado() y no guardamos letras adivinadas. 
+test('gana cuando se adivinan todas las letras', () => {
+  const juego = new Ahorcado('agil');
+  juego.adivinar('a');
+  juego.adivinar('g');
+  juego.adivinar('i');
+  juego.adivinar('l');
+  expect(juego.estaGanado()).toBe(true);
+});
+//GREEN: crear el método estaGanado
+
 
 
