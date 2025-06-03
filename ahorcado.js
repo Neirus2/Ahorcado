@@ -32,6 +32,9 @@ class Ahorcado {
     return this.errores >= this.maxErrores;
   }
 
+  mostrarProgreso() {
+    return '_'.repeat(this.palabra.length);
+  }
 }
 
 module.exports = Ahorcado;

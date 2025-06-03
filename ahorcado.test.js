@@ -52,6 +52,11 @@ test('solo se permiten letras como entrada válida', () => {
 });
 //GREEN: crear el método de validación
 
-
+// Test No. 7: RED: va a fallar porque no existe el método para mostrar guiones
+test('mostrar guiones para la palabra a adivinar', () => {
+  const juego = new Ahorcado('agil');
+  expect(juego.mostrarProgreso()).toBe('____');
+});
+// GREEN: se crea el método mostrarProgreso}
 
 
