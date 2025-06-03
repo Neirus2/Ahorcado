@@ -7,6 +7,9 @@ class Ahorcado {
   }
 
   adivinar(letra) {
+    if (!/^[a-zA-Z]$/.test(letra)) {
+      throw new Error('Entrada inválida');
+    }
     if (this.palabra.includes(letra)) {
       this.letrasAdivinadas.add(letra);
       return true;
@@ -28,6 +31,7 @@ class Ahorcado {
   estaPerdido() {
     return this.errores >= this.maxErrores;
   }
+
 }
 
 module.exports = Ahorcado;

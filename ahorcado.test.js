@@ -43,3 +43,15 @@ test('el juego se pierde cuando se alcanzan los errores máximos', () => {
   expect(juego.estaPerdido()).toBe(true);
 });
 
+// Test No. 6: RED: va a fallar porque no existe la validación en la función adivinar
+test('solo se permiten letras como entrada válida', () => {
+  const juego = new Ahorcado('agil');
+  expect(() => juego.adivinar('1')).toThrow('Entrada inválida');
+  expect(() => juego.adivinar('@')).toThrow('Entrada inválida');
+  expect(() => juego.adivinar('ag')).toThrow('Entrada inválida');
+});
+//GREEN: crear el método de validación
+
+
+
+
