@@ -33,8 +33,12 @@ class Ahorcado {
   }
 
   mostrarProgreso() {
-    return '_'.repeat(this.palabra.length);
+    return this.palabra
+      .split('')
+      .map(letra => (this.letrasAdivinadas.has(letra) ? letra : '_'))
+      .join('');
   }
+  
 }
 
 module.exports = Ahorcado;

@@ -59,4 +59,12 @@ test('mostrar guiones para la palabra a adivinar', () => {
 });
 // GREEN: se crea el método mostrarProgreso}
 
+// Test No. 8: RED: va a fallar porque no existe el método para mostrar las letras correctas
+test('letras correctas revelan su posición en la palabra', () => {
+  const juego = new Ahorcado('agil');
+  juego.adivinar('a');
+  juego.adivinar('i');
+  expect(juego.mostrarProgreso()).toBe('a_i_');
+});
 
+// GREEN: se modifica el método mostrarProgreso para que muestre las letras
