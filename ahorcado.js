@@ -2,22 +2,30 @@ class Ahorcado {
   constructor(palabra, maxErrores = 3) {
     this.palabra = palabra;
     this.letrasAdivinadas = new Set();
+     this.letrasIntentadas = new Set();
     this.errores = 0;
     this.maxErrores = maxErrores; 
   }
 
   adivinar(letra) {
-    if (!/^[a-zA-Z]$/.test(letra)) {
-      throw new Error('Entrada inválida');
-    }
-    if (this.palabra.includes(letra)) {
-      this.letrasAdivinadas.add(letra);
-      return true;
-    } else {
-      this.errores++;
-      return false;
-    }
+  letra = letra.trim().toLowerCase(); // Normalizar entrada
+  if (!/^[a-zA-Z]$/.test(letra)) {
+    throw new Error('Entrada inválida');
   }
+  if (this.letrasIntentadas.has(letra)) {
+    return 'Ya usaste esa letra';
+  }
+  this.letrasIntentadas.add(letra);
+
+  if (this.palabra.includes(letra)) {
+    this.letrasAdivinadas.add(letra);
+    return true;
+  } else {
+    this.errores++;
+    return false;
+  }
+}
+
 
   estaGanado() {
     for (const letra of new Set(this.palabra)) {

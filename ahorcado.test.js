@@ -68,3 +68,14 @@ test('letras correctas revelan su posición en la palabra', () => {
 });
 
 // GREEN: se modifica el método mostrarProgreso para que muestre las letras
+
+// Test No. 8: RED: va a fallar porque no existe la validación de letras repetidas
+test('ignorar letras repetidas, mostrar mensaje de aviso', () => {
+  const juego = new Ahorcado('agil');
+  juego.adivinar('a'); // Correcta
+  expect(juego.adivinar('a')).toBe('Ya usaste esa letra');
+  juego.adivinar('z'); // Incorrecta
+  expect(juego.adivinar('z')).toBe('Ya usaste esa letra');
+});
+
+// GREEN: se modifica el método adivinar para validar si una letra ya ha sido usada
