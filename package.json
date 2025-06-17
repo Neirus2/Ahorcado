@@ -63,7 +63,6 @@
     "fill-range": "^7.1.1",
     "find-up": "^4.1.0",
     "fs.realpath": "^1.0.0",
-    "fsevents": "^2.3.3",
     "function-bind": "^1.1.2",
     "gensync": "^1.0.0-beta.2",
     "get-caller-file": "^2.0.5",
@@ -204,6 +203,9 @@
     "url": "git+https://github.com/itsmanurm/ahorcado.git"
   },
   "keywords": [],
+  "optionalDependencies": {
+  "fsevents": "^2.3.3"
+},
   "author": "",
   "license": "ISC",
   "type": "commonjs",
