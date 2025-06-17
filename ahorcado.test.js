@@ -79,3 +79,17 @@ test('ignorar letras repetidas, mostrar mensaje de aviso', () => {
 });
 
 // GREEN: se modifica el método adivinar para validar si una letra ya ha sido usada
+
+// Test No 9: no va a pasar porque no existe una funcion para devolever los errores restantes
+test('mostrar el número de intentos restantes', () => {
+  const juego = new Ahorcado('agil');
+  expect(juego.intentosRestantes()).toBe(3); // Valor inicial
+  juego.adivinar('z'); // Incorrecta
+  expect(juego.intentosRestantes()).toBe(2);
+  juego.adivinar('x'); // Incorrecta
+  expect(juego.intentosRestantes()).toBe(1);
+});
+
+// GREEN: creamos la funcion IntentosRestantes()
+
+

@@ -46,6 +46,10 @@ class Ahorcado {
       .map(letra => (this.letrasAdivinadas.has(letra) ? letra : '_'))
       .join('');
   }
+
+  intentosRestantes() {
+  return this.maxErrores - this.errores;
+}
   
 }
 
