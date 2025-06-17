@@ -92,4 +92,11 @@ test('mostrar el número de intentos restantes', () => {
 
 // GREEN: creamos la funcion IntentosRestantes()
 
+// Test No. 11: RED: va a fallar porque no existe la normalización de entradas
+test('validar entradas con espacios y mayúsculas/minúsculas', () => {
+  const juego = new Ahorcado('agil');
+  expect(juego.adivinar(' A ')).toBe(true); // Ignorar espacios
+  expect(juego.adivinar('a')).toBe('Ya usaste esa letra'); // Letra repetida
+});
+//GREEN: paso sin alterar el código, ya que la función adivinar ya normaliza las entradas
 
