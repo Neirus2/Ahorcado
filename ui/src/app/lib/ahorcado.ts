@@ -5,7 +5,7 @@ export default class Ahorcado {
   errores: number;
   maxErrores: number;
 
-  constructor(palabra: string, maxErrores: number = 3) {
+  constructor(palabra: string, maxErrores = 3) {
     this.palabra = palabra;
     this.letrasAdivinadas = new Set();
     this.letrasIntentadas = new Set();

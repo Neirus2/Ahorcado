@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AhorcadoComponent } from './ahorcado';
 import { PalabraService } from '../services/palabra';
-import { of, throwError } from 'rxjs';
 import Ahorcado from '../lib/ahorcado';
 
 describe('AhorcadoComponent', () => {

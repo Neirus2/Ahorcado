@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import Ahorcado from '../lib/ahorcado';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common'; // 👈 Necesario para *ngFor y más
-import { NgClass } from '@angular/common'; // 👈 Necesario para [ngClass]
+import { CommonModule, NgClass } from '@angular/common'; // ✅ Importamos CommonModule y NgClass
 import { PalabraService } from '../services/palabra';
 
 @Component({
   selector: 'app-ahorcado',
-  standalone: true, // 👈 si no lo tenías
+  standalone: true, // ✅ Standalone component
   templateUrl: './ahorcado.html',
   styleUrls: ['./ahorcado.scss'],
   imports: [
-    CommonModule,  // 👈 Para directivas como *ngFor, *ngIf, etc.
-    NgClass,       // 👈 Para usar [ngClass]
+    CommonModule,  // ✅ Para *ngFor, *ngIf
+    NgClass,       // ✅ Para usar [ngClass]
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class AhorcadoComponent implements OnInit {
@@ -26,20 +25,23 @@ export class AhorcadoComponent implements OnInit {
   mensaje = '';
   letraInput = '';
 
-  constructor(private palabraService: PalabraService) {}
+  // ✅ Usamos inject en lugar de constructor
+  private palabraService = inject(PalabraService);
 
   ngOnInit() {
     this.iniciarJuego();
   }
 
   iniciarJuego() {
-    this.palabraService.obtenerPalabra().then(palabra => {
-      this.juego = new Ahorcado(palabra, 6);
-      this.actualizarEstado();
-    }).catch(err => {
-      console.error('Error al obtener palabra:', err);
-      this.mensaje = '⚠️ Error al cargar la palabra. Intenta más tarde.';
-    });
+    this.palabraService.obtenerPalabra()
+      .then(palabra => {
+        this.juego = new Ahorcado(palabra, 6);
+        this.actualizarEstado();
+      })
+      .catch(err => {
+        console.error('❌ Error al obtener palabra:', err);
+        this.mensaje = '⚠️ Error al cargar la palabra. Intenta más tarde.';
+      });
   }
 
   reiniciarJuego() {
