@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing'; 
+import { PalabraService } from './palabra';
 
-import { Palabra } from './palabra';
-
-describe('Palabra', () => {
-  let service: Palabra;
+describe('PalabraService', () => {
+  let service: PalabraService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Palabra);
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule], 
+    });
+    service = TestBed.inject(PalabraService);
   });
 
   it('should be created', () => {

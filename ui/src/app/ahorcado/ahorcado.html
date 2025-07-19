@@ -1,52 +1,51 @@
 <div class="ahorcado-container">
   <h1>🎯 Juego del Ahorcado</h1>
 
-<div class="ahorcado-dibujo flex justify-center my-6">
-  <svg width="200" height="250" class="ahorcado-svg">
-    <!-- Poste -->
-    <line x1="20" y1="230" x2="180" y2="230" stroke="black" stroke-width="4" />
-    <line x1="50" y1="230" x2="50" y2="20" stroke="black" stroke-width="4" />
-    <line x1="50" y1="20" x2="120" y2="20" stroke="black" stroke-width="4" />
-    <line x1="120" y1="20" x2="120" y2="50" stroke="black" stroke-width="4" />
+  <div class="ahorcado-dibujo flex justify-center my-6">
+    <svg width="200" height="250" class="ahorcado-svg">
+      <!-- Poste -->
+      <line x1="20" y1="230" x2="180" y2="230" stroke="black" stroke-width="4" />
+      <line x1="50" y1="230" x2="50" y2="20" stroke="black" stroke-width="4" />
+      <line x1="50" y1="20" x2="120" y2="20" stroke="black" stroke-width="4" />
+      <line x1="120" y1="20" x2="120" y2="50" stroke="black" stroke-width="4" />
 
-    <!-- Cabeza -->
-    <circle 
-      *ngIf="juego.errores > 0" 
-      cx="120" cy="70" r="20" 
-      stroke="black" stroke-width="3" fill="none" />
+      <!-- Cabeza -->
+      <circle 
+        *ngIf="juego.errores > 0" 
+        cx="120" cy="70" r="20" 
+        stroke="black" stroke-width="3" fill="none" />
 
-    <!-- Cuerpo -->
-    <line 
-      *ngIf="juego.errores > 1" 
-      x1="120" y1="90" x2="120" y2="150" 
-      stroke="black" stroke-width="3" />
+      <!-- Cuerpo -->
+      <line 
+        *ngIf="juego.errores > 1" 
+        x1="120" y1="90" x2="120" y2="150" 
+        stroke="black" stroke-width="3" />
 
-    <!-- Brazo izquierdo -->
-    <line 
-      *ngIf="juego.errores > 2" 
-      x1="120" y1="110" x2="90" y2="130" 
-      stroke="black" stroke-width="3" />
+      <!-- Brazo izquierdo -->
+      <line 
+        *ngIf="juego.errores > 2" 
+        x1="120" y1="110" x2="90" y2="130" 
+        stroke="black" stroke-width="3" />
 
-    <!-- Brazo derecho -->
-    <line 
-      *ngIf="juego.errores > 3" 
-      x1="120" y1="110" x2="150" y2="130" 
-      stroke="black" stroke-width="3" />
+      <!-- Brazo derecho -->
+      <line 
+        *ngIf="juego.errores > 3" 
+        x1="120" y1="110" x2="150" y2="130" 
+        stroke="black" stroke-width="3" />
 
-    <!-- Pierna izquierda -->
-    <line 
-      *ngIf="juego.errores > 4" 
-      x1="120" y1="150" x2="90" y2="180" 
-      stroke="black" stroke-width="3" />
+      <!-- Pierna izquierda -->
+      <line 
+        *ngIf="juego.errores > 4" 
+        x1="120" y1="150" x2="90" y2="180" 
+        stroke="black" stroke-width="3" />
 
-    <!-- Pierna derecha -->
-    <line 
-      *ngIf="juego.errores > 5" 
-      x1="120" y1="150" x2="150" y2="180" 
-      stroke="black" stroke-width="3" />
-  </svg>
-</div>
-
+      <!-- Pierna derecha -->
+      <line 
+        *ngIf="juego.errores > 5" 
+        x1="120" y1="150" x2="150" y2="180" 
+        stroke="black" stroke-width="3" />
+    </svg>
+  </div>
 
   <div class="progreso">
     <p class="palabra">{{ progreso }}</p>
@@ -74,18 +73,16 @@
       placeholder="Ingresa una letra"
       class="input-letra"
       (keyup.enter)="adivinarLetra()">
-      <button 
-        (click)="adivinarLetra()" 
-        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow transition duration-300 ease-in-out">
-        Adivinar
-      </button>
+    <button 
+      (click)="adivinarLetra()" 
+      class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow transition duration-300 ease-in-out">
+      Adivinar
+    </button>
   </div>
 
- <div class="acciones">
-  <button class="reiniciar" (click)="reiniciarJuego()">Reiniciar</button>
-</div>
-
-
+  <div class="acciones">
+    <button class="reiniciar" (click)="reiniciarJuego()">Reiniciar</button>
+  </div>
 
   <div class="mensaje" [ngClass]="{ 'ganaste': juego.estaGanado(), 'perdiste': juego.estaPerdido() }">
     {{ mensaje }}

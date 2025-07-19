@@ -36,14 +36,21 @@ describe('AhorcadoComponent', () => {
     expect(component.progreso).toContain('_');
   });
 
-  it('debería usar fallback cuando la API falla', async () => {
-    palabraServiceSpy.obtenerPalabra.and.returnValue(Promise.reject('API error'));
+ it('debería usar fallback cuando la API falla', async () => {
+  palabraServiceSpy.obtenerPalabra.and.returnValue(Promise.reject('API error'));
 
-    await component.iniciarJuego();
+  await component.iniciarJuego();
+  fixture.detectChanges();
+  await fixture.whenStable();
 
-    expect(component.juego.palabra).toBe('angular'); // Fallback
-    expect(component.mensaje).toContain('Error al cargar palabra');
-  });
+  // ✅ Debe crear un juego con la palabra fallback
+  expect(component.juego.palabra).toBe('angular');
+  // ✅ Debe mostrar el mensaje completo
+  expect(component.mensaje).toContain('⚠️ Error al cargar la palabra. Intenta más tarde.');
+});
+
+
+
 
   it('debería reiniciar el juego correctamente', async () => {
     palabraServiceSpy.obtenerPalabra.and.returnValue(Promise.resolve('angular'));

@@ -2,30 +2,29 @@ import { Component, OnInit, inject } from '@angular/core';
 import Ahorcado from '../lib/ahorcado';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule, NgClass } from '@angular/common'; // ✅ Importamos CommonModule y NgClass
+import { CommonModule, NgClass } from '@angular/common'; 
 import { PalabraService } from '../services/palabra';
 
 @Component({
   selector: 'app-ahorcado',
-  standalone: true, // ✅ Standalone component
+  standalone: true, 
   templateUrl: './ahorcado.html',
   styleUrls: ['./ahorcado.scss'],
   imports: [
-    CommonModule,  // ✅ Para *ngFor, *ngIf
-    NgClass,       // ✅ Para usar [ngClass]
+    CommonModule,  
+    NgClass,       
     FormsModule,
     HttpClientModule,
   ]
 })
 export class AhorcadoComponent implements OnInit {
-  juego!: Ahorcado;
+  juego: Ahorcado = new Ahorcado('_____', 6); // ✅ Dummy inicial
   progreso = '';
   intentosRestantes = 0;
   letrasIntentadas: string[] = [];
   mensaje = '';
   letraInput = '';
 
-  // ✅ Usamos inject en lugar de constructor
   private palabraService = inject(PalabraService);
 
   ngOnInit() {
@@ -40,7 +39,9 @@ export class AhorcadoComponent implements OnInit {
       })
       .catch(err => {
         console.error('❌ Error al obtener palabra:', err);
+        this.juego = new Ahorcado('angular', 6); // ✅ fallback para tests
         this.mensaje = '⚠️ Error al cargar la palabra. Intenta más tarde.';
+        this.actualizarEstado();
       });
   }
 
