@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
     - name: 📥 Checkout repo
       uses: actions/checkout@v4
@@ -18,12 +19,23 @@ jobs:
       with:
         node-version: '18.x'
 
-    - name: 📦 Install dependencies
+    - name: 📦 Install dependencies (root)
       run: npm ci
+
+    - name: 📦 Install dependencies (Angular app)
+      run: |
+        cd ui
+        npm ci
 
     - name: 🚀 Install Angular CLI
       run: npm install -g @angular/cli
 
     - name: 🧪 Run Unit Tests (Karma)
-      run: npx ng test --watch=false --browsers=ChromeHeadless
+      run: |
+        cd ui
+        npx ng test --watch=false --browsers=ChromeHeadless
 
+    - name: 🏗️ Build Angular project
+      run: |
+        cd ui
+        npx ng build --configuration production
