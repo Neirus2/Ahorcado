@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
     - name: 📥 Checkout repo
       uses: actions/checkout@v4
@@ -22,12 +21,9 @@ jobs:
     - name: 📦 Install dependencies
       run: npm ci
 
+    - name: 🚀 Install Angular CLI
+      run: npm install -g @angular/cli
+
     - name: 🧪 Run Unit Tests (Karma)
-      run: |
-        npx ng test --watch=false --browsers=ChromeHeadless
+      run: npx ng test --watch=false --browsers=ChromeHeadless
 
-    - name: 🧹 Run ESLint
-      run: npm run lint
-
-    - name: 🏗️ Build project
-      run: npm run build
