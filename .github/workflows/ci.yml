@@ -17,25 +17,22 @@ jobs:
     - name: 🟢 Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18.x'
+        node-version: '20.x'  # Angular CLI requires Node >=20
 
-    - name: 📦 Install dependencies (root)
+    - name: 📦 Install root dependencies
       run: npm ci
 
-    - name: 📦 Install dependencies (Angular app)
-      run: |
-        cd ui
-        npm ci
-
-    - name: 🚀 Install Angular CLI
+    - name: 🚀 Install Angular CLI globally
       run: npm install -g @angular/cli
 
+    - name: 📦 Install UI dependencies
+      working-directory: ui
+      run: npm ci
+
     - name: 🧪 Run Unit Tests (Karma)
-      run: |
-        cd ui
-        npx ng test --watch=false --browsers=ChromeHeadless
+      working-directory: ui
+      run: npx ng test --watch=false --browsers=ChromeHeadless
 
     - name: 🏗️ Build Angular project
-      run: |
-        cd ui
-        npx ng build --configuration production
+      working-directory: ui
+      run: npx ng build --configuration=production
