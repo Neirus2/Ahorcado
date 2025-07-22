@@ -29,9 +29,21 @@ jobs:
       working-directory: ui
       run: npm ci
 
-    - name: 🧪 Run Unit Tests (Karma)
+    - name: 🧪 Run Unit Tests with coverage (Karma)
       working-directory: ui
-      run: npx ng test --watch=false --browsers=ChromeHeadless
+      run: npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
+
+    - name: 📊 Upload coverage artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-coverage
+        path: ui/coverage
+
+    - name: 📊 Show coverage summary in Actions
+      working-directory: ui
+      run: |
+        echo "### 📊 Code Coverage Summary" >> $GITHUB_STEP_SUMMARY
+        cat coverage/lcov-report/index.html | grep -A 2 "Statements" >> $GITHUB_STEP_SUMMARY
 
     - name: 🏗️ Build Angular project
       working-directory: ui
