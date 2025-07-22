@@ -32,6 +32,7 @@ jobs:
     - name: 🧪 Run Unit Tests with coverage (Karma)
       working-directory: ui
       run: npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
+      
 
     - name: 📊 Upload coverage artifact
       uses: actions/upload-artifact@v4
@@ -43,7 +44,9 @@ jobs:
       working-directory: ui
       run: |
         echo "### 📊 Code Coverage Summary" >> $GITHUB_STEP_SUMMARY
-        cat coverage/lcov-report/index.html | grep -A 2 "Statements" >> $GITHUB_STEP_SUMMARY
+        npx istanbul report text-summary | tee coverage-summary.txt
+        cat coverage-summary.txt >> $GITHUB_STEP_SUMMARY
+
 
     - name: 🏗️ Build Angular project
       working-directory: ui
