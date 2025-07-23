@@ -34,11 +34,12 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.1.0",
+    "@angular/build": "^20.1.2",
     "@angular/cli": "^20.1.0",
     "@angular/compiler-cli": "^20.1.0",
     "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
+    "@cucumber/cucumber": "^9.0.0",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@eslint/js": "^9.31.0",
     "@eslint/json": "^0.13.0",
@@ -58,11 +59,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "nyc": "^17.1.0",
+    "playwright": "^1.45.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.8.2",
-    "typescript-eslint": "8.34.1",
-    "@cucumber/cucumber": "^9.0.0",
-    "playwright": "^1.45.0"
+    "typescript-eslint": "8.34.1"
   },
   "cucumber": {
     "paths": [
