@@ -27,7 +27,7 @@ jobs:
 
     - name: 📦 Install UI dependencies
       working-directory: ui
-      run: npm ci
+      run: npm install
 
     - name: 🧪 Run Unit Tests with coverage (Karma)
       working-directory: ui
