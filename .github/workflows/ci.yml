@@ -55,3 +55,8 @@ jobs:
     - name: 🧹 Run ESLint
       working-directory: ui
       run: npm run lint
+      
+    - name: ✅ Run Acceptance Tests (Cucumber)
+      working-directory: ui
+      run: npm run test:atdd
+

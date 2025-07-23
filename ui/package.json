@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "cucumber-js e2e/features/**/*.feature --require e2e/steps/**/*.ts --require-module ts-node/register"
+    "e2e": "cucumber-js e2e/features/**/*.feature --require e2e/steps/**/*.ts --require-module ts-node/register",
+    "test:atdd": "cucumber-js"
+    
   },
   "prettier": {
     "overrides": [
