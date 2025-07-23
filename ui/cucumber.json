@@ -1,0 +1,6 @@
+{
+  "require": ["e2e/steps/ahorcado.steps.ts"],
+  "paths": ["e2e/features/ahorcado.feature"],
+  "format": ["progress", "json:reports/cucumber-report.json"],
+  "publishQuiet": true
+}

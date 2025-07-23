@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "e2e": "cucumber-js e2e/features/**/*.feature --require e2e/steps/**/*.ts --require-module ts-node/register"
   },
   "prettier": {
     "overrides": [
@@ -27,6 +28,7 @@
     "@angular/forms": "^20.1.0",
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
+    "@playwright/test": "^1.54.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -56,7 +58,22 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "nyc": "^17.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.8.2",
-    "typescript-eslint": "8.34.1"
+    "typescript-eslint": "8.34.1",
+    "@cucumber/cucumber": "^9.0.0",
+    "playwright": "^1.45.0"
+  },
+  "cucumber": {
+    "paths": [
+      "e2e/features/ahorcado.feature"
+    ],
+    "require": [
+      "e2e/steps/ahorcado.steps.ts"
+    ],
+    "requireModule": [
+      "ts-node/register"
+    ],
+    "publishQuiet": true
   }
 }
