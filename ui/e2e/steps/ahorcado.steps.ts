@@ -27,15 +27,26 @@ When('ingreso la letra {string} y hago clic en Adivinar', async (letra: string) 
 });
 
 Then('debería ver la letra {string} en la lista de letras usadas', async (letra: string) => {
-  const letras = await page.$$eval('.letra-badge', nodes => nodes.map(n => n.textContent?.trim()));
-  assert(letras.includes(letra), `La letra ${letra} no está en la lista de letras usadas`);
+  await page.waitForFunction(
+    (letra) => {
+      return Array.from(document.querySelectorAll('.letra-badge'))
+        .map(el => el.textContent?.trim())
+        .includes(letra);
+    },
+    letra,
+    { timeout: 5000 }
+  );
 });
 
 Then('debería ver que los intentos restantes son menores a 6', async () => {
-  const intentosText = await page.textContent('.intentos');
-  const intentosRestantes = parseInt(intentosText?.match(/\d+/)?.[0] || '6', 10);
-  assert(intentosRestantes < 6, 'Los intentos restantes no se actualizaron correctamente');
+  await page.waitForFunction(() => {
+    const el = document.querySelector('.intentos');
+    if (!el) return false;
+    const match = el.textContent?.match(/\d+/);
+    return match && parseInt(match[0], 10) < 6;
+  }, { timeout: 5000 });
 });
+
 
 After(async () => {
   if (page) await page.close();
