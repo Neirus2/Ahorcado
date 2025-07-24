@@ -32,7 +32,6 @@ jobs:
     - name: 🧪 Run Unit Tests with coverage (Karma)
       working-directory: ui
       run: npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
-      
 
     - name: 📊 Upload coverage artifact
       uses: actions/upload-artifact@v4
@@ -47,16 +46,20 @@ jobs:
         npx istanbul report text-summary | tee coverage-summary.txt
         cat coverage-summary.txt >> $GITHUB_STEP_SUMMARY
 
-
     - name: 🏗️ Build Angular project
       working-directory: ui
       run: npx ng build --configuration=production
 
+    - name: 🌐 Serve Angular build in background
+      working-directory: ui
+      run: |
+        npx http-server ./dist/ui/browser -p 4200 &
+        npx wait-on http://localhost:4200
+
     - name: 🧹 Run ESLint
       working-directory: ui
       run: npm run lint
-      
+
     - name: ✅ Run Acceptance Tests (Cucumber)
       working-directory: ui
       run: npm run test:atdd
-
