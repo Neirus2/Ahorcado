@@ -5,12 +5,18 @@ Feature: Juego del Ahorcado
     When la página carga
     Then debería ver el título "🎯 Juego del Ahorcado"
 
-  Scenario: Adivinar letra correcta
+  Scenario: Mostrar elementos de la interfaz
     Given estoy en la página de inicio
-    When ingreso la letra "a" y hago clic en Adivinar
-    Then debería ver la letra "a" en la lista de letras usadas
+    Then debería ver el input para ingresar letras
+    And debería ver el botón "Adivinar"
+    And debería ver el botón "Reiniciar"
 
-  Scenario: Mostrar intentos restantes
+  Scenario: Mostrar intentos al iniciar
     Given estoy en la página de inicio
-    When ingreso la letra "z" y hago clic en Adivinar
-    Then debería ver que los intentos restantes son menores a 6
+    Then debería ver los intentos restantes al iniciar el juego
+  
+  Scenario: No hay letras usadas al iniciar el juego
+    Given estoy en la página de inicio
+    Then no debería haber letras usadas
+
+

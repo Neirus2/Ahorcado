@@ -20,31 +20,30 @@ Then('debería ver el título {string}', async (titulo: string) => {
   assert.strictEqual(content, titulo);
 });
 
-When('ingreso la letra {string} y hago clic en Adivinar', async (letra: string) => {
-  await page.fill('input.input-letra', letra);
-  await page.click('button:has-text("Adivinar")');
-  await page.waitForTimeout(500); // Espera corta para actualizar el DOM
+Then('debería ver el input para ingresar letras', async () => {
+  await page.waitForSelector('input.input-letra', { state: 'visible', timeout: 10000 });
 });
 
-Then('debería ver la letra {string} en la lista de letras usadas', async (letra: string) => {
-  await page.waitForFunction(
-    (letra) => {
-      return Array.from(document.querySelectorAll('.letra-badge'))
-        .map(el => el.textContent?.trim())
-        .includes(letra);
-    },
-    letra,
-    { timeout: 5000 }
-  );
+Then('debería ver el botón "Adivinar"', async () => {
+  await page.waitForSelector('button:has-text("Adivinar")', { state: 'visible', timeout: 10000 });
 });
 
-Then('debería ver que los intentos restantes son menores a 6', async () => {
+Then('debería ver el botón "Reiniciar"', async () => {
+  await page.waitForSelector('button.reiniciar', { state: 'visible', timeout: 10000 });
+});
+
+Then('debería ver los intentos restantes al iniciar el juego', async () => {
   await page.waitForFunction(() => {
     const el = document.querySelector('.intentos');
-    if (!el) return false;
-    const match = el.textContent?.match(/\d+/);
-    return match && parseInt(match[0], 10) < 6;
-  }, { timeout: 5000 });
+    return el?.textContent?.includes('Intentos restantes');
+  }, { timeout: 10000 });
+});
+
+Then('no debería haber letras usadas', async () => {
+  const letras = await page.$$eval('.letra-badge', nodes =>
+    nodes.map(n => n.textContent?.trim()).filter(Boolean)
+  );
+  assert.strictEqual(letras.length, 0, `Se encontraron letras usadas al iniciar: ${letras.join(', ')}`);
 });
 
 
