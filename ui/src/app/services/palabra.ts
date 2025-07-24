@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class PalabraService {
   // 🌐 Trae una palabra en español directamente
-  private apiEsp = 'https://random-word-api.herokuapp.com/word?number=1&lang=es';
+  private apiEsp = 'https://random-word-api.herokuapp.com/word?number=1&lang=en';
 
   // ✅ Usamos inject() en lugar de constructor
   private http = inject(HttpClient);
