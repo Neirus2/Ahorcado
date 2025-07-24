@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "cucumber-js e2e/features/**/*.feature --require e2e/steps/**/*.ts --require-module ts-node/register",
-    "test:atdd": "cucumber-js"
+     "test:atdd": "cucumber-js e2e/features/**/*.feature --require e2e/steps/**/*.ts --require-module ts-node/register"
     
   },
   "prettier": {

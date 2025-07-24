@@ -1,5 +1,5 @@
-import { Given, When, Then, After } from '@cucumber/cucumber';
-import { chromium, Browser, Page } from 'playwright';
+import { Given, When, Then, After, Before } from '@cucumber/cucumber';
+import { chromium, Browser, Page, BrowserContext } from 'playwright';
 import assert from 'assert';
 
 let browser: Browser;
@@ -37,3 +37,7 @@ Then('debería ver que los intentos restantes son menores a 6', async () => {
   assert(intentosRestantes < 6, 'Los intentos restantes no se actualizaron correctamente');
 });
 
+After(async () => {
+  await page.close();
+  await browser.close();
+});
