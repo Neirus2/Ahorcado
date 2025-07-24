@@ -80,4 +80,14 @@ describe('AhorcadoComponent', () => {
     expect(component.intentosRestantes).toBeLessThan(6);
     expect(component.mensaje).toContain('❌');
   });
+
+  it('debería normalizar la palabra quitando tildes', async () => {
+  // Simulamos que la API devuelve una palabra con tilde
+  palabraServiceSpy.obtenerPalabra.and.returnValue(Promise.resolve('camión'));
+
+  await component.iniciarJuego();
+
+  // Verificamos que la palabra en el juego no tenga tilde
+  expect(component.juego.palabra).toBe('camion');
+});
 });

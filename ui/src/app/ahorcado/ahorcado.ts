@@ -32,18 +32,19 @@ export class AhorcadoComponent implements OnInit {
   }
 
   iniciarJuego() {
-    this.palabraService.obtenerPalabra()
-      .then(palabra => {
-        this.juego = new Ahorcado(palabra, 6);
-        this.actualizarEstado();
-      })
-      .catch(err => {
-        console.error('❌ Error al obtener palabra:', err);
-        this.juego = new Ahorcado('angular', 6); // ✅ fallback para tests
-        this.mensaje = '⚠️ Error al cargar la palabra. Intenta más tarde.';
-        this.actualizarEstado();
-      });
-  }
+  this.palabraService.obtenerPalabra()
+    .then(palabra => {
+      const palabraSinTildes = this.quitarTildes(palabra);
+      this.juego = new Ahorcado(palabraSinTildes, 6);
+      this.actualizarEstado();
+    })
+    .catch(err => {
+      console.error('❌ Error al obtener palabra:', err);
+      this.juego = new Ahorcado('angular', 6); // ✅ fallback para tests
+      this.mensaje = '⚠️ Error al cargar la palabra. Intenta más tarde.';
+      this.actualizarEstado();
+    });
+}
 
   reiniciarJuego() {
     this.iniciarJuego();
@@ -74,4 +75,9 @@ export class AhorcadoComponent implements OnInit {
       this.mensaje = '💀 Perdiste. La palabra era ' + this.juego.palabra;
     }
   }
+
+  quitarTildes(palabra: string): string {
+  return palabra.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
 }
