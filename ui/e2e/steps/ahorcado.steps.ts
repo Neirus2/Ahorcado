@@ -38,6 +38,6 @@ Then('debería ver que los intentos restantes son menores a 6', async () => {
 });
 
 After(async () => {
-  await page.close();
-  await browser.close();
+  if (page) await page.close();
+  if (browser) await browser.close();
 });

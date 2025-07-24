@@ -28,6 +28,13 @@ jobs:
     - name: 📦 Install UI dependencies
       working-directory: ui
       run: npm install
+    - name: 🧭 Install Playwright Browsers
+      working-directory: ui
+      run: |
+          npm install playwright
+          npx playwright install --with-deps chromium
+          npx playwright --version
+          ls -la ~/.cache/ms-playwright/
 
     - name: 🧪 Run Unit Tests with coverage (Karma)
       working-directory: ui
@@ -45,6 +52,7 @@ jobs:
         echo "### 📊 Code Coverage Summary" >> $GITHUB_STEP_SUMMARY
         npx istanbul report text-summary | tee coverage-summary.txt
         cat coverage-summary.txt >> $GITHUB_STEP_SUMMARY
+      
 
     - name: 🏗️ Build Angular project
       working-directory: ui
