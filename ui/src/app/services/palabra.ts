@@ -16,7 +16,7 @@ export class PalabraService {
   try {
     const words = await firstValueFrom(this.http.get<string[]>(this.apiEsp));
     if (Array.isArray(words) && words.length > 0) {
-      let palabra = words[0];
+      const palabra = words[0];
 
       // Normalizamos: elimina tildes y pasa a minúscula
       const normalizada = palabra.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
